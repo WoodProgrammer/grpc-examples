@@ -5,7 +5,7 @@ get_current_branch(){
 }
 
 check_remote_master(){
-  git log calculator --pretty=format:'%h' > /tmp/local_branch
+  git log ${BRANCH} --pretty=format:'%h' > /tmp/local_branch
   git fetch --all
   git log origin/master --pretty=format:'%h' > /tmp/remote_master
 
@@ -19,6 +19,6 @@ check_remote_master(){
   done < /tmp/remote_master
 }
 
-#get_current_branch
+get_current_branch
 check_remote_master
 
