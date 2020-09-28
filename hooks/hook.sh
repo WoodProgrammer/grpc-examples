@@ -5,18 +5,17 @@ get_current_branch(){
 }
 
 check_remote_master(){
-  git log ${BRANCH} --pretty=format:'%h' --graph > /tmp/local_branch
+  git log calculator --pretty=format:'%h' > /tmp/local_branch
   git fetch --all
-  git log origin/master --pretty=format:'%h' --graph > /tmp/remote_master
-
-  DIFF_COMMITS=$(comm -23 /tmp/remote_master /tmp/local_branch)
+  git log origin/master --pretty=format:'%h' > /tmp/remote_master
+  DIFF_REMOTE_MASTER=$(comm -23 /tmp/remote_master /tmp/local_branch)
 
 }
 
 notify_developer(){
-  echo "Hello you are far away from the remote master ${DIFF_COMMITS}"
+  echo "Hello you are far away from the remote master ${DIFF_REMOTE_MASTER}"
 }
 
-get_current_branch
+#get_current_branch
 check_remote_master
 notify_developer
